@@ -9,7 +9,6 @@ import android.util.Log
 import java.sql.SQLException
 
 class ListaCompraDatabaseAdapter(private val dbContext: Context) {
-
     companion object {
         // Definición de la base de datos y las tablas
         private const val DATABASE_NOMBRE = "dbCompra"
@@ -38,7 +37,7 @@ class ListaCompraDatabaseAdapter(private val dbContext: Context) {
     private var dbCompra: SQLiteDatabase? = null
 
     // Clase interna SQLiteOpenHelper
-    private inner class DatabaseHelper(context: Context) :
+    private class DatabaseHelper(context: Context) :
         SQLiteOpenHelper(context, DATABASE_NOMBRE, null, DATABASE_VERSION) {
 
         override fun onCreate(db: SQLiteDatabase) {

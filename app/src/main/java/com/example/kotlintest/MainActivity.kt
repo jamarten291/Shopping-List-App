@@ -55,9 +55,7 @@ class MainActivity : AppCompatActivity(), DataArguments {
         }
 
         findViewById<Button>(R.id.bt_borrar).setOnClickListener { _ ->
-            dbHelper.obtenerTodosElementos().forEach {
-                dbHelper.borrarElemento(getLong(0))
-            }
+            dbHelper.limpiarTabla()
             reloadRecyclerList()
         }
 
