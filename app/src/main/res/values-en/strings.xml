@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Shopping List</string>
+    <string name="toast_cancelar">Cancelled</string>
+    <string name="btn_agregar">Add</string>
+    <string name="btn_eliminar">Clear</string>
+    <string name="btn_salir">Exit</string>
+    <string name="btn_confirmar">Confirm</string>
+    <string name="btn_cancelar">Cancel</string>
+    <string name="placeholder_nombre">Product name</string>
+    <string name="placeholder_cantidad">Amount</string>
+    <string name="toast_rellenar_campos">You must fill in all fields</string>
+</resources>
+

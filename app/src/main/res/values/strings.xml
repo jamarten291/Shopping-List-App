@@ -1,3 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">KotlinTest</string>
+    <string name="app_name">Lista de la compra</string>
+    <string name="toast_cancelar">Cancelado</string>
+    <string name="btn_agregar">Añadir</string>
+    <string name="btn_eliminar">Limpiar</string>
+    <string name="btn_salir">Salir</string>
+    <string name="btn_confirmar">Confirmar</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="placeholder_nombre">Nombre del producto</string>
+    <string name="placeholder_cantidad">Cantidad</string>
+    <string name="toast_rellenar_campos">"Debes rellenar todos los campos"</string>
 </resources>

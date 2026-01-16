@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), DataArguments {
             }
         } else {
             // Cancelado o ERROR
-            Toast.makeText(this, "Cancelado", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.toast_cancelar, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -49,19 +49,19 @@ class MainActivity : AppCompatActivity(), DataArguments {
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(this)
 
-        findViewById<Button>(R.id.bt_agregar).setOnClickListener { v ->
+        findViewById<Button>(R.id.bt_agregar).setOnClickListener { _ ->
             val intent = Intent(this, CrearProducto::class.java)
             launcher.launch(intent)
         }
 
-        findViewById<Button>(R.id.bt_borrar).setOnClickListener { v ->
+        findViewById<Button>(R.id.bt_borrar).setOnClickListener { _ ->
             dbHelper.obtenerTodosElementos().forEach {
                 dbHelper.borrarElemento(getLong(0))
             }
             reloadRecyclerList()
         }
 
-        findViewById<Button>(R.id.bt_salir).setOnClickListener { v ->
+        findViewById<Button>(R.id.bt_salir).setOnClickListener { _ ->
             dbHelper.close()
             finishAffinity()
         }

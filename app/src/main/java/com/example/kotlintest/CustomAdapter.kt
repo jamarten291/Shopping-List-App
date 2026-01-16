@@ -15,14 +15,9 @@ class CustomAdapter(private val dataSet: ArrayList<Producto>) :
      * (custom ViewHolder)
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvNombre: TextView
-        val tvCantidad: TextView
-
-        init {
-            // Define click listener for the ViewHolder's View
-            tvNombre = view.findViewById(R.id.tv_nombre)
-            tvCantidad = view.findViewById(R.id.tv_cantidad)
-        }
+        // Define click listener for the ViewHolder's View
+        val tvNombre: TextView = view.findViewById(R.id.tv_nombre)
+        val tvCantidad: TextView = view.findViewById(R.id.tv_cantidad)
 
         fun setElement(p: Producto) {
             tvNombre.text = p.nombre

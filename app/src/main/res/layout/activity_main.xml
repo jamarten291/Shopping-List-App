@@ -17,28 +17,29 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        style="?android:attr/buttonBarButtonStyle">
 
         <Button
             android:id="@+id/bt_agregar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Añadir" />
+            android:text="@string/btn_agregar" />
 
         <Button
             android:id="@+id/bt_borrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Borrar" />
+            android:text="@string/btn_eliminar" />
 
         <Button
             android:id="@+id/bt_salir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Salir" />
+            android:text="@string/btn_salir" />
     </LinearLayout>
 
     <TextView
@@ -46,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Lista de la compra"
+        android:text="@string/app_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />

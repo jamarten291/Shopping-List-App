@@ -29,7 +29,7 @@ class CrearProducto : AppCompatActivity(), DataArguments {
             !etCantidad.text.toString().isEmpty()
         }
 
-        findViewById<Button>(R.id.bt_confirmar).setOnClickListener { v ->
+        findViewById<Button>(R.id.bt_confirmar).setOnClickListener { _ ->
             if (validInput()) {
                 val finishIntent = Intent().apply {
                     putExtra(ARG_1, etNombre.text.toString())
@@ -38,11 +38,11 @@ class CrearProducto : AppCompatActivity(), DataArguments {
                 setResult(RESULT_OK, finishIntent)
                 finish()
             } else {
-                Toast.makeText(this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.toast_rellenar_campos, Toast.LENGTH_SHORT).show()
             }
         }
 
-        findViewById<Button>(R.id.bt_cancelar).setOnClickListener { v ->
+        findViewById<Button>(R.id.bt_cancelar).setOnClickListener { _ ->
             setResult(RESULT_CANCELED)
             finish()
         }
