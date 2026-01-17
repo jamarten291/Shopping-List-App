@@ -13,25 +13,28 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity(), DataArguments {
+class MainActivity :
+    AppCompatActivity(),
+    DataArguments {
     private val dbHelper = ListaCompraDatabaseAdapter(this)
     private val adapter = CustomAdapter(ArrayList())
-    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
-            val data: Intent? = result.data
+    private val launcher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val data: Intent? = result.data
 
-            if (data != null) {
-                val nombre = data.getStringExtra(ARG_1)
-                val cantidad = data.getIntExtra(ARG_2, 0)
+                if (data != null) {
+                    val nombre = data.getStringExtra(ARG_1)
+                    val cantidad = data.getIntExtra(ARG_2, 0)
 
-                if (nombre != null) dbHelper.crearElemento(nombre, cantidad)
-                reloadRecyclerList()
+                    if (nombre != null) dbHelper.crearElemento(nombre, cantidad)
+                    reloadRecyclerList()
+                }
+            } else {
+                // Cancelado o ERROR
+                Toast.makeText(this, R.string.toast_cancelar, Toast.LENGTH_SHORT).show()
             }
-        } else {
-            // Cancelado o ERROR
-            Toast.makeText(this, R.string.toast_cancelar, Toast.LENGTH_SHORT).show()
         }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,11 +72,13 @@ class MainActivity : AppCompatActivity(), DataArguments {
         val updatedDataSet = ArrayList<Producto>()
 
         dbHelper.obtenerTodosElementos().forEach {
-            updatedDataSet.add(Producto(
-                getInt(0),
-                getString(1),
-                getInt(2)
-            ))
+            updatedDataSet.add(
+                Producto(
+                    getInt(0),
+                    getString(1),
+                    getInt(2),
+                ),
+            )
         }
         adapter.updateDataSet(updatedDataSet)
     }

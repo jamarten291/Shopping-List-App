@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import java.sql.SQLException
 
-class ListaCompraDatabaseAdapter(private val dbContext: Context) {
+class ListaCompraDatabaseAdapter(
+    private val dbContext: Context,
+) {
     companion object {
         // Definición de la base de datos y las tablas
         private const val DATABASE_NOMBRE = "dbCompra"
@@ -28,23 +30,27 @@ class ListaCompraDatabaseAdapter(private val dbContext: Context) {
         // Sentencia SQL para la creación de la base de datos
         private const val CREAR_DATABASE =
             "CREATE TABLE $DATABASE_TABLA (" +
-                    "$CLAVE_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "$CLAVE_PRODUCTO TEXT NOT NULL, " +
-                    "$CLAVE_CANTIDAD INTEGER NOT NULL);"
+                "$CLAVE_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "$CLAVE_PRODUCTO TEXT NOT NULL, " +
+                "$CLAVE_CANTIDAD INTEGER NOT NULL);"
     }
 
     private var dbHelper: DatabaseHelper? = null
     private var dbCompra: SQLiteDatabase? = null
 
     // Clase interna SQLiteOpenHelper
-    private class DatabaseHelper(context: Context) :
-        SQLiteOpenHelper(context, DATABASE_NOMBRE, null, DATABASE_VERSION) {
-
+    private class DatabaseHelper(
+        context: Context,
+    ) : SQLiteOpenHelper(context, DATABASE_NOMBRE, null, DATABASE_VERSION) {
         override fun onCreate(db: SQLiteDatabase) {
             db.execSQL(CREAR_DATABASE)
         }
 
-        override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        override fun onUpgrade(
+            db: SQLiteDatabase,
+            oldVersion: Int,
+            newVersion: Int,
+        ) {
             Log.w(TAG, "Actualizando BD")
             db.execSQL("DROP TABLE IF EXISTS $DATABASE_TABLA")
             onCreate(db)
@@ -65,70 +71,76 @@ class ListaCompraDatabaseAdapter(private val dbContext: Context) {
     }
 
     // Método para insertar un elemento en la BD
-    fun crearElemento(nombre: String, cantidad: Int): Long {
-        val valoresProducto = ContentValues().apply {
-            put(CLAVE_PRODUCTO, nombre)
-            put(CLAVE_CANTIDAD, cantidad)
-        }
+    fun crearElemento(
+        nombre: String,
+        cantidad: Int,
+    ): Long {
+        val valoresProducto =
+            ContentValues().apply {
+                put(CLAVE_PRODUCTO, nombre)
+                put(CLAVE_CANTIDAD, cantidad)
+            }
         return dbCompra!!.insert(DATABASE_TABLA, null, valoresProducto)
     }
 
     // Método para borrar un elemento en la BD
-    fun borrarElemento(rowId: Long): Boolean {
-        return dbCompra!!.delete(
+    fun borrarElemento(rowId: Long): Boolean =
+        dbCompra!!.delete(
             DATABASE_TABLA,
             "$CLAVE_ID=$rowId",
-            null
+            null,
         ) > 0
-    }
 
     // Método para borrar todos los elementos de la tabla
-    fun limpiarTabla(): Boolean {
-        return dbCompra!!.delete(DATABASE_TABLA, null, null) > 0
-    }
+    fun limpiarTabla(): Boolean = dbCompra!!.delete(DATABASE_TABLA, null, null) > 0
 
     // Método para obtener todos los elementos de la tabla
-    fun obtenerTodosElementos(): Cursor {
-        return dbCompra!!.query(
+    fun obtenerTodosElementos(): Cursor =
+        dbCompra!!.query(
             DATABASE_TABLA,
             COLUMNAS_CONSULTA,
             null,
             null,
             null,
             null,
-            null
+            null,
         )
-    }
 
     // Método para obtener un elemento por su ID
     @Throws(SQLException::class)
     fun obtenerElemento(rowId: Long): Cursor {
-        val cursor = dbCompra!!.query(
-            true,
-            DATABASE_TABLA,
-            COLUMNAS_CONSULTA,
-            "$CLAVE_ID=$rowId",
-            null,
-            null,
-            null,
-            null,
-            null
-        )
+        val cursor =
+            dbCompra!!.query(
+                true,
+                DATABASE_TABLA,
+                COLUMNAS_CONSULTA,
+                "$CLAVE_ID=$rowId",
+                null,
+                null,
+                null,
+                null,
+                null,
+            )
         cursor.moveToFirst()
         return cursor
     }
 
     // Método para actualizar un elemento
-    fun actualizarElemento(rowId: Long, producto: String, cantidad: Int): Boolean {
-        val args = ContentValues().apply {
-            put(CLAVE_PRODUCTO, producto)
-            put(CLAVE_CANTIDAD, cantidad)
-        }
+    fun actualizarElemento(
+        rowId: Long,
+        producto: String,
+        cantidad: Int,
+    ): Boolean {
+        val args =
+            ContentValues().apply {
+                put(CLAVE_PRODUCTO, producto)
+                put(CLAVE_CANTIDAD, cantidad)
+            }
         return dbCompra!!.update(
             DATABASE_TABLA,
             args,
             "$CLAVE_ID=$rowId",
-            null
+            null,
         ) > 0
     }
 }

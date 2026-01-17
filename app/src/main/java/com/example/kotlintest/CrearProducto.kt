@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class CrearProducto : AppCompatActivity(), DataArguments {
+class CrearProducto :
+    AppCompatActivity(),
+    DataArguments {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,15 +28,16 @@ class CrearProducto : AppCompatActivity(), DataArguments {
 
         val validInput: () -> Boolean = {
             !etNombre.text.toString().isEmpty() &&
-            !etCantidad.text.toString().isEmpty()
+                !etCantidad.text.toString().isEmpty()
         }
 
         findViewById<Button>(R.id.bt_confirmar).setOnClickListener { _ ->
             if (validInput()) {
-                val finishIntent = Intent().apply {
-                    putExtra(ARG_1, etNombre.text.toString())
-                    putExtra(ARG_2, etCantidad.text.toString().toInt())
-                }
+                val finishIntent =
+                    Intent().apply {
+                        putExtra(ARG_1, etNombre.text.toString())
+                        putExtra(ARG_2, etCantidad.text.toString().toInt())
+                    }
                 setResult(RESULT_OK, finishIntent)
                 finish()
             } else {
